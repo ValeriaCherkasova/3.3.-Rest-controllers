@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    void saveUser(User user);
+    boolean saveUser(User user);
 
     void deleteUser(Long userId);
 

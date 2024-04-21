@@ -37,14 +37,14 @@ public class UserServiceImp implements UserDetailsService, UserService {
 
     @Override
     @Transactional
-    public void saveUser(User user) {
+    public boolean saveUser(User user) {
         if (userRepository.findByUsername(user.getUsername()) != null) {
-            return;
+            return false; // Пользователь уже существует
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-
         userRepository.save(user);
+        return true;
     }
 
     @Override

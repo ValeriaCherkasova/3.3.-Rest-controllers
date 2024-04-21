@@ -8,21 +8,17 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import ru.kata.spring.boot_security.demo.service.UserServiceImp;
-
-import javax.persistence.EntityManager;
+import project.service.UserServiceImp;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final SuccessUserHandler successUserHandler;
     private final UserServiceImp userService;
-    private final EntityManager entityManager;
 
-    public WebSecurityConfig(SuccessUserHandler successUserHandler, UserServiceImp userService, EntityManager entityManager) {
+    public WebSecurityConfig(SuccessUserHandler successUserHandler, UserServiceImp userService) {
         this.successUserHandler = successUserHandler;
         this.userService = userService;
-        this.entityManager = entityManager;
     }
 
     @Override
@@ -33,6 +29,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/login").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
+                //Доступ разрешен всем пользователей
+                .antMatchers("/api/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().successHandler(successUserHandler)
