@@ -5,8 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.model.Role;
 import project.model.User;
-import project.service.RoleServiceImp;
-import project.service.UserServiceImp;
+import project.service.RoleService;
+import project.service.UserService;
 
 import java.security.Principal;
 import java.util.Arrays;
@@ -15,10 +15,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/admin")
 public class AdminApiController {
-    private final UserServiceImp userService;
-    private final RoleServiceImp roleService;
+    private final UserService userService;
+    private final RoleService roleService;
 
-    public AdminApiController(UserServiceImp userService, RoleServiceImp roleService) {
+    public AdminApiController(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }

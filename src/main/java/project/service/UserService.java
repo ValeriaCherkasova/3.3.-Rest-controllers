@@ -1,6 +1,5 @@
 package project.service;
 
-
 import project.model.User;
 
 import java.util.List;

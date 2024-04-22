@@ -3,16 +3,16 @@ package project.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.model.User;
-import project.service.UserServiceImp;
+import project.service.UserService;
 
 import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/user")
 public class UserApiController {
-    private final UserServiceImp userService;
+    private final UserService userService;
 
-    public UserApiController(UserServiceImp userService) {
+    public UserApiController(UserService userService) {
         this.userService = userService;
     }
 
